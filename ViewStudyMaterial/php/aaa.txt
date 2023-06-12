@@ -1,0 +1,20 @@
+ <?php
+                                            
+                                            if(mysqli_num_rows($res)==0)
+    {
+        echo "<script> alert('No Data Found');</script>";
+    }
+    else if(mysqli_num_rows($res)>0)
+    {
+    while($row=mysqli_fetch_assoc($res))
+    {
+        echo "<option>".$row["unitNo"]." ".$row["unitName"]."</option>";
+    }
+}
+    else
+    {
+        echo mysqli_error($con);
+    }
+                                            
+                                            
+                                            ?>
