@@ -1,7 +1,6 @@
 <?php
-include "../../../connection.php";
+include "../../connection.php";
 $sel = mysqli_query($con, "SELECT * FROM available_class");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +38,13 @@ $sel = mysqli_query($con, "SELECT * FROM available_class");
                     <h2 class="title">student attendance management form</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST">
-                        <div class="form-row">
+                    <form method="POST" action="attendance/index.php">
+                            <div class="form-row">
                             <div class="name">Subject</div>
                             <div class="value">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="subject">
+                                        <select name="lectureID">
                                             <option disabled="disabled" selected="selected">Choose option</option>
                                             <?php
                                             while ($row = mysqli_fetch_assoc($sel)) {
@@ -62,7 +61,7 @@ $sel = mysqli_query($con, "SELECT * FROM available_class");
                                                 $sc = $row["subjectCode"];
                                                 $sel4 = mysqli_query($con, "select subjectName from subject_details where subjectCode='" . $sc . "'");
                                                 $row4 = mysqli_fetch_row($sel4);
-                                                echo "<option>Lecture ID: " . $row['lectureID'] . " => Class ID: " . $row["classID"] . " => Time: " . $st . " To " . $et . " => Day: " . $row3[0] . " => Subject Code: " . $sc . " => Subject Name: " . $row4[0];
+                                                echo "<option value='".$row['lectureID']."'ss>Lecture ID: " . $row['lectureID'] . " => Class ID: " . $row["classID"] . " => Time: " . $st . " To " . $et . " => Day: " . $row3[0] . " => Subject Code: " . $sc . " => Subject Name: " . $row4[0]."</option>";
                                             }
                                             ?>
                                         </select>
