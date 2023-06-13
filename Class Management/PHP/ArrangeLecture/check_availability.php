@@ -20,7 +20,7 @@
         $facultyID=$_SESSION["facultyID"];
         // echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
         // echo $facultyID." ".$subject_code;
-        $ins="insert into available_class values('$class_id','$time','$day','$facultyID','$subject_code');";
+        $ins="insert into available_class(classID,timeID,dayID,facultyID,subjectCode) values('$class_id','$time','$day','$facultyID','$subject_code');";
         if(mysqli_query($con,$ins))
         {
             // echo "alert('Class Booked')";

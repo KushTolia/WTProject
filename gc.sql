@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 06:28 PM
+-- Generation Time: Jun 13, 2023 at 09:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `available_class` (
+  `lectureID` int(11) NOT NULL,
   `classID` varchar(20) NOT NULL,
   `timeID` varchar(20) NOT NULL,
   `dayID` int(10) NOT NULL,
@@ -39,11 +40,18 @@ CREATE TABLE `available_class` (
 -- Dumping data for table `available_class`
 --
 
-INSERT INTO `available_class` (`classID`, `timeID`, `dayID`, `facultyID`, `subjectCode`) VALUES
-('A201', 't1', 1, '22F301', '2CP01'),
-('A202', 't1', 1, '22F303', '2CP04'),
-('A201', 't2', 4, '22F301', '2CP01'),
-('A203', 't2', 4, '22F303', '2CP04');
+INSERT INTO `available_class` (`lectureID`, `classID`, `timeID`, `dayID`, `facultyID`, `subjectCode`) VALUES
+(1, 'A201', 't1', 1, '22F301', '2CP01'),
+(2, 'A202', 't1', 1, '22F303', '2CP04'),
+(3, 'A201', 't2', 4, '22F301', '2CP01'),
+(4, 'A203', 't2', 4, '22F303', '2CP04'),
+(5, 'A202', 't1', 6, '22F303', '2CP04'),
+(6, 'A204', 't1', 6, '22F303', '2CP01'),
+(7, 'A202', 't1', 2, '22F303', '2CP04'),
+(8, 'A202', 't1', 7, '22F303', '2CP04'),
+(9, 'A201', 't1', 4, '22F303', '2CP04'),
+(11, 'A201', 't2', 3, '22F301', '2CP01'),
+(12, 'A201', 't1', 5, '22F301', '2CP01');
 
 -- --------------------------------------------------------
 
@@ -152,6 +160,18 @@ INSERT INTO `stud` (`studentID`, `userID`, `fatherName`, `motherName`, `semester
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_attendance`
+--
+
+CREATE TABLE `student_attendance` (
+  `studentID` varchar(20) NOT NULL,
+  `lectureID` int(11) NOT NULL,
+  `attendance` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `study_material`
 --
 
@@ -255,6 +275,7 @@ INSERT INTO `users` (`userID`, `firstName`, `lastName`, `fullName`, `branch`, `e
 -- Indexes for table `available_class`
 --
 ALTER TABLE `available_class`
+  ADD PRIMARY KEY (`lectureID`),
   ADD KEY `classID` (`classID`),
   ADD KEY `dayID` (`dayID`),
   ADD KEY `timeID` (`timeID`),
@@ -295,6 +316,13 @@ ALTER TABLE `stud`
   ADD KEY `userID` (`userID`);
 
 --
+-- Indexes for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `lectureID` (`lectureID`);
+
+--
 -- Indexes for table `study_material`
 --
 ALTER TABLE `study_material`
@@ -324,6 +352,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `available_class`
+--
+ALTER TABLE `available_class`
+  MODIFY `lectureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `study_material`
@@ -363,6 +397,13 @@ ALTER TABLE `faculty_subject`
 --
 ALTER TABLE `stud`
   ADD CONSTRAINT `stud_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+
+--
+-- Constraints for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  ADD CONSTRAINT `student_attendance_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `stud` (`studentID`),
+  ADD CONSTRAINT `student_attendance_ibfk_3` FOREIGN KEY (`lectureID`) REFERENCES `available_class` (`lectureID`);
 
 --
 -- Constraints for table `study_material`
