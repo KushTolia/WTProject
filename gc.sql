@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 09:36 AM
+-- Generation Time: Jun 14, 2023 at 10:16 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -160,18 +160,6 @@ INSERT INTO `stud` (`studentID`, `userID`, `fatherName`, `motherName`, `semester
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_attendance`
---
-
-CREATE TABLE `student_attendance` (
-  `studentID` varchar(20) NOT NULL,
-  `lectureID` int(11) NOT NULL,
-  `attendance` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `study_material`
 --
 
@@ -191,6 +179,44 @@ CREATE TABLE `study_material` (
 
 INSERT INTO `study_material` (`sno`, `subjectCode`, `userID`, `unitNo`, `unitName`, `author`, `path`) VALUES
 (4, '2CP01', 'mayurvegad12', 4, 'Permutation', 'Roason', 'PDF Placement_2022-23.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stud_attendance`
+--
+
+CREATE TABLE `stud_attendance` (
+  `attendanceID` int(11) NOT NULL,
+  `studentID` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stud_attendance`
+--
+
+INSERT INTO `stud_attendance` (`attendanceID`, `studentID`, `status`) VALUES
+(1, '22CP316', 'absent');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stud_attendance_detail`
+--
+
+CREATE TABLE `stud_attendance_detail` (
+  `attendanceID` int(11) NOT NULL,
+  `lectureID` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stud_attendance_detail`
+--
+
+INSERT INTO `stud_attendance_detail` (`attendanceID`, `lectureID`, `date`) VALUES
+(1, 1, '2023-06-13');
 
 -- --------------------------------------------------------
 
@@ -316,19 +342,26 @@ ALTER TABLE `stud`
   ADD KEY `userID` (`userID`);
 
 --
--- Indexes for table `student_attendance`
---
-ALTER TABLE `student_attendance`
-  ADD KEY `studentID` (`studentID`),
-  ADD KEY `lectureID` (`lectureID`);
-
---
 -- Indexes for table `study_material`
 --
 ALTER TABLE `study_material`
   ADD PRIMARY KEY (`sno`),
   ADD KEY `subjectCode` (`subjectCode`),
   ADD KEY `study_material_ibfk_2` (`userID`);
+
+--
+-- Indexes for table `stud_attendance`
+--
+ALTER TABLE `stud_attendance`
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `attendanceID` (`attendanceID`);
+
+--
+-- Indexes for table `stud_attendance_detail`
+--
+ALTER TABLE `stud_attendance_detail`
+  ADD PRIMARY KEY (`attendanceID`),
+  ADD KEY `lectureID` (`lectureID`);
 
 --
 -- Indexes for table `subject_details`
@@ -366,6 +399,12 @@ ALTER TABLE `study_material`
   MODIFY `sno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `stud_attendance_detail`
+--
+ALTER TABLE `stud_attendance_detail`
+  MODIFY `attendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -399,18 +438,24 @@ ALTER TABLE `stud`
   ADD CONSTRAINT `stud_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --
--- Constraints for table `student_attendance`
---
-ALTER TABLE `student_attendance`
-  ADD CONSTRAINT `student_attendance_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `stud` (`studentID`),
-  ADD CONSTRAINT `student_attendance_ibfk_3` FOREIGN KEY (`lectureID`) REFERENCES `available_class` (`lectureID`);
-
---
 -- Constraints for table `study_material`
 --
 ALTER TABLE `study_material`
   ADD CONSTRAINT `study_material_ibfk_1` FOREIGN KEY (`subjectCode`) REFERENCES `subject_details` (`subjectCode`),
   ADD CONSTRAINT `study_material_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+
+--
+-- Constraints for table `stud_attendance`
+--
+ALTER TABLE `stud_attendance`
+  ADD CONSTRAINT `stud_attendance_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `stud` (`studentID`),
+  ADD CONSTRAINT `stud_attendance_ibfk_3` FOREIGN KEY (`attendanceID`) REFERENCES `stud_attendance_detail` (`attendanceID`);
+
+--
+-- Constraints for table `stud_attendance_detail`
+--
+ALTER TABLE `stud_attendance_detail`
+  ADD CONSTRAINT `stud_attendance_detail_ibfk_1` FOREIGN KEY (`lectureID`) REFERENCES `available_class` (`lectureID`);
 
 --
 -- Constraints for table `subject_details`
