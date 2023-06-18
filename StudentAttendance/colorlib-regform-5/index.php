@@ -61,7 +61,8 @@ $sel = mysqli_query($con, "SELECT * FROM available_class");
                                                 $sc = $row["subjectCode"];
                                                 $sel4 = mysqli_query($con, "select subjectName from subject_details where subjectCode='" . $sc . "'");
                                                 $row4 = mysqli_fetch_row($sel4);
-                                                echo "<option value='".$row['lectureID']."'ss>Lecture ID: " . $row['lectureID'] . " => Class ID: " . $row["classID"] . " => Time: " . $st . " To " . $et . " => Day: " . $row3[0] . " => Subject Code: " . $sc . " => Subject Name: " . $row4[0]."</option>";
+                                                echo "<option value='".$row['lectureID']." ".$sc."'>Lecture ID: " . $row['lectureID'] . " => Class ID: " . $row["classID"] . " => Time: " . $st . " To " . $et . " => Day: " . $row3[0] . " => Subject Code: " . $sc . " => Subject Name: " . $row4[0]."</<option>";
+                                                // echo "<input type='hidden' value=$sc name='subjectCode'/>";
                                             }
                                             ?>
                                         </select>

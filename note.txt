@@ -1,0 +1,24 @@
+
+				<script>
+					var c=confirm("You Mark Absent Do You Want To Make It Present?");
+					var f=0;
+					if(c)
+					{
+							f=1;
+							// $up1=mysqli_query($con,"UPDATE stud_attendance SET status='present' WHERE attendanceID='".$ro1[0]."' AND studentID='".$sid."';");
+							// if($up1)
+							// {
+							// 	$count=1;								
+							// }
+							// else
+							// {
+							// 	$count=2;
+							// 	echo "console.log('".mysqli_error($con)."');";
+							// }
+					}
+					else
+					{
+						f=2;
+					}
+					console.log(f);
+				</script>
