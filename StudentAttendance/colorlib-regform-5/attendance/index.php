@@ -1,51 +1,40 @@
 <?php
-session_start();
 include "../../../connection.php";
 $count = 0;
+$myflag = 0;
 if (isset($_GET['flag'])) {
 	// You can now use the $flag variable in your code
 	$flag = $_GET['flag'];
-	$aid=$_GET['aid'];
-	$sid=$_GET['sid'];
-	if($flag==1)
-	{
+	$aid = $_GET['aid'];
+	$sid = $_GET['sid'];
+	if ($flag == 1) {
 		// 2nd echo "Flag: $flag AttendanceID: $aid StudentID: $sid" ;
-		$up1=mysqli_query($con,"UPDATE stud_attendance SET status='present' WHERE attendanceID='".$aid."' AND studentID='".$sid."';");
-		if($up1)
-		{
-			$count=1;		
+		$up1 = mysqli_query($con, "UPDATE stud_attendance SET status='present' WHERE attendanceID='" . $aid . "' AND studentID='" . $sid . "';");
+		if ($up1) {
+			$count = 1;
 			//2nd echo "Ok";						
-		}
-		else
-		{
-			$count=2;
+		} else {
+			$count = 2;
 			echo mysqli_error($con);
 		}
 	}
-	if($flag==2)
-	{
-		$count=2;
+	if ($flag == 2) {
+		$count = 2;
 	}
-	if($flag==3)
-	{
+	if ($flag == 3) {
 		// 2nd echo "Flag: $flag AttendanceID: $aid StudentID: $sid" ;
-		$up1=mysqli_query($con,"UPDATE stud_attendance SET status='absent' WHERE attendanceID='".$aid."' AND studentID='".$sid."';");
-		if($up1)
-		{
-			$count=2;		
+		$up1 = mysqli_query($con, "UPDATE stud_attendance SET status='absent' WHERE attendanceID='" . $aid . "' AND studentID='" . $sid . "';");
+		if ($up1) {
+			$count = 2;
 			//2nd echo "Ok";						
-		}
-		else
-		{
-			$count=1;
+		} else {
+			$count = 1;
 			echo mysqli_error($con);
 		}
 	}
-	if($flag==4)
-	{
-		$count=1;
+	if ($flag == 4) {
+		$count = 1;
 	}
-
 }
 
 if (isset($_REQUEST["temp"])) {
@@ -54,32 +43,27 @@ if (isset($_REQUEST["temp"])) {
 	$sc = $temp[1];
 
 	// $lectureID=$_REQUEST["lectureID"];
-//2nd	echo "TEMP";
+	//2nd	echo "TEMP";
 } else {
 	$temp = explode(" ", $_REQUEST["lectureID"]);
 	$lectureID = $temp[0];
 	$sc = $temp[1];
-// 2nd	echo $lectureID;
-// 2nd	echo " " . $sc . " ";
-	$taid=mysqli_query($con,"SELECT MAX(attendanceID) FROM stud_attendance_detail");//temp attendance id
-	$rtaid=mysqli_fetch_row($taid);//rtaid=result temp attendance id 
-	$taid=$rtaid[0];//taid=temp attendance id
-	$td=mysqli_query($con,"SELECT date FROM stud_attendance_detail WHERE attendanceID='".$taid."';");//td=temp date
-	$rtd=mysqli_fetch_row($td);//Result Temp Date
-	$td=$rtd[0];
-	$d=date("Y-m-d");
-	if($d==$td)
-	{
-	}
-	else
-	{
-		$i=mysqli_query($con,"insert into stud_attendance_detail(lectureID,date) values('".$lectureID."','".$d."')");
-		if($i)
-		{
+	// 2nd	echo $lectureID;
+	// 2nd	echo " " . $sc . " ";
+	$taid = mysqli_query($con, "SELECT MAX(attendanceID) FROM stud_attendance_detail"); //temp attendance id
+	$rtaid = mysqli_fetch_row($taid); //rtaid=result temp attendance id 
+	$taid = $rtaid[0]; //taid=temp attendance id
+	$td = mysqli_query($con, "SELECT date FROM stud_attendance_detail WHERE attendanceID='" . $taid . "';"); //td=temp date
+	$rtd = mysqli_fetch_row($td); //Result Temp Date
+	$td = $rtd[0];
+	$d = date("Y-m-d");
+	if ($d == $td) {
+		$myflag = 1;
+	} else {
+		$i = mysqli_query($con, "insert into stud_attendance_detail(lectureID,date) values('" . $lectureID . "','" . $d . "')");
+		if ($i) {
 			// 3rd echo "Data Inserted";
-		}	
-		else
-		{
+		} else {
 			echo mysqli_error($con);
 		}
 	}
@@ -229,11 +213,10 @@ $t = 0;
 										$count = 1;
 										echo "<script>alert('You Mark Already Present')</script>";
 									} else if ($status == "absent") {
-										header("Location:temp2.php?flag=1&lectureID=" . $lectureID . " " . $sc."&aid=".$ro1[0]."&sid=".$sid);									
-							
+										header("Location:temp2.php?flag=1&lectureID=" . $lectureID . " " . $sc . "&aid=" . $ro1[0] . "&sid=" . $sid);
 									}
-								} 
-								if($status==null) {
+								}
+								if ($status == null) {
 									$i1 = mysqli_query($con, "insert into stud_attendance values(" . $ro1[0] . ",'" . $sid . "','present')");
 									if ($i1) {
 										$count = 1;
@@ -245,7 +228,7 @@ $t = 0;
 							if (isset($_POST["absent"])) {
 								$r1 = mysqli_query($con, "SELECT MAX(attendanceID) FROM stud_attendance_detail");
 								$ro1 = mysqli_fetch_row($r1);
-								$sid=$_POST["absent"];
+								$sid = $_POST["absent"];
 								$r2 = mysqli_query($con, "SELECT date FROM stud_attendance_detail WHERE attendanceID=" . $ro1[0]);
 								$ro2 = mysqli_fetch_row($r2);
 								$tempd = $ro2[0];
@@ -258,11 +241,10 @@ $t = 0;
 										$count = 2;
 										echo "<script>alert('You Mark Already Absent')</script>";
 									} else if ($status == "present") {
-										header("Location:temp2.php?flag=2&lectureID=" . $lectureID . " " . $sc."&aid=".$ro1[0]."&sid=".$sid);									
-										
+										header("Location:temp2.php?flag=2&lectureID=" . $lectureID . " " . $sc . "&aid=" . $ro1[0] . "&sid=" . $sid);
 									}
-								} 
-								if($status==null) {
+								}
+								if ($status == null) {
 									$i1 = mysqli_query($con, "insert into stud_attendance values(" . $ro1[0] . ",'" . $sid . "','absent')");
 									if ($i1) {
 										$count = 2;
@@ -316,13 +298,28 @@ $t = 0;
 	<button type='submit' name='present' class='btn btn-success' id='sid' value=$sid>P</button>
 	<button type='submit' name='absent' class='btn btn-danger ml-2' value=$sid id='sid'>A</button>" . "</td>";
 									// $count=0;
+									if ($myflag == 1) {
+										$ta = mysqli_query($con, "SELECT MAX(attendanceID) FROM stud_attendance_detail"); //temp AttendanceID
+										$rta = mysqli_fetch_row($ta); //result temp AttendanceID
+										$ts = mysqli_query($con, "SELECT status FROM stud_attendance WHERE attendanceID='" . $rta[0] . "' AND studentID='" . $sid . "';"); //temp status
+										$rts = mysqli_fetch_row($ts);
+										if ($rts[0] == "present") {
+											$count = 1;
+										}
+										if ($rts[0] == "absent") {
+											$count = 2;
+										}
+									}
 									if ($count == 0) {
 										// echo "<td class='column4' style='color:white;background-color: brown;'><h1>----"."</td></h1>";
-										echo "<td class='column4 bg-secondary' style='color:white'><h2>----</h2></td>";
+										// echo "<td class='column4 bg-secondary' style='color:white'><h2>----</h2></td>";
+										echo "<td class='column4'><button type='button' class='btn btn-secondary btn-lg'>-------</button></td>";
 									} else if ($count == 1) {
-										echo "<td class='column4 status bg-success'>Present" . "</td>";
+										// echo "<td class='column4 status bg-success'>Present" . "</td>";
+										echo "<td class='column4'><button type='button' class='btn btn-success btn-lg'>Present</button></td>";
 									} else if ($count == 2) {
-										echo "<td class='column4 status bg-danger'>Absent" . "</td>";
+										// echo "<td class='column4 status bg-danger'>Absent" . "</td>";
+										echo "<td class='column4'><button type='button' class='btn btn-danger btn-lg'>Absent</button></td>";
 									}
 									// echo "<td class='column4'>Present"."</td>";
 									echo "</tr>";
@@ -331,6 +328,7 @@ $t = 0;
 								?>
 							</tbody>
 						</table>
+						<button type='button' onclick="window.location.href='../../../HomePage/sidebar-01/index.php'" class='btn btn-dark btn-lg pull-right m-3'>Home</button>
 					</form>
 				</div>
 			</div>
