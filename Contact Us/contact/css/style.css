@@ -51,10 +51,10 @@ a:hover {
 .inner {
   max-width: 758px;
   margin: auto;
-  background: #39459b;
+  /* background: #39459b; */
   /* background: white; */
 
-  border: 10px solid #0d99d7;
+  /* border: 10px solid hwb(204 97% 1%); */
   padding: 77px 99px 87px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -99,7 +99,8 @@ p {
     top: 41px;
     transform: scaleX(0);
     transition: all .15s ease;
-    background: #fff; }
+    /* background: #fff; } */
+  }
 
 .form-control {
   border: none;
@@ -111,7 +112,8 @@ p {
   background: none;
   font-family: "Montserrat-SemiBold"; }
   .form-control:focus, .form-control:valid {
-    border-bottom: 2px solid #fff; }
+    /* border-bottom: 2px solid #fff; */
+   }
     .form-control:focus + span, .form-control:valid + span {
       transform: translateY(-22px) scale(0.8); }
       .form-control:focus + span + .border, .form-control:valid + span + .border {
@@ -191,7 +193,7 @@ button {
     padding: 0; }
 
   .inner {
-    padding: 27px 20px 37px;
+    /* padding: 27px 20px 37px; */
     border: none;
     box-shadow: none;
     -webkit-box-shadow: none;
