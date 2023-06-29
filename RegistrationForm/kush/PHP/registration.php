@@ -28,17 +28,17 @@ include "../../../connection.php";
         $error = $_FILES['my_image']['error'];
         if ($error > 0) {
             $er = 'Unknown Error Occured';
-            header("Location: ../index.html?error=$er");
+            header("Location: ../index.php?error=$er");
         }
-        if ($img_size > 125000) {
-            $er = 'Sorry Your File Is Too Large';
-            header("Location: ../index.html?error=$er");
+        if ($img_size > 2097152) {
+            $er = 'Sorry Your File Is Too Larger It Must Be Less Than 2MB';
+            header("Location: ../index.php?error=$er");
         } else {
             $img_ex = pathinfo($img_nm, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
 
             $allowed_exs = array("jpg", "jpeg", "png");
-            if (in_array($img_ex_lc, $allowed_exs)) {
+            if (in_array($img_ex_lc, $allowed_exs)) { 
                 $new_img_nm = uniqid("IMG-", true) . '.' . $img_ex_lc;
                 $img_upload_path = '../../../profile_photos/' . $new_img_nm;
                 move_uploaded_file($img_path, $img_upload_path);

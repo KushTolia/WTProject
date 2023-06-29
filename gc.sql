@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2023 at 10:16 AM
+-- Generation Time: Jun 29, 2023 at 01:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -51,7 +51,8 @@ INSERT INTO `available_class` (`lectureID`, `classID`, `timeID`, `dayID`, `facul
 (8, 'A202', 't1', 7, '22F303', '2CP04'),
 (9, 'A201', 't1', 4, '22F303', '2CP04'),
 (11, 'A201', 't2', 3, '22F301', '2CP01'),
-(12, 'A201', 't1', 5, '22F301', '2CP01');
+(12, 'A201', 't1', 5, '22F301', '2CP01'),
+(14, 'A201', 't2', 7, '22F301', '2CP01');
 
 -- --------------------------------------------------------
 
@@ -139,6 +140,118 @@ INSERT INTO `faculty_subject` (`facultyID`, `subjectCode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quiz_details`
+--
+
+CREATE TABLE `quiz_details` (
+  `quizID` int(11) NOT NULL,
+  `subjectCode` varchar(20) NOT NULL,
+  `date` date NOT NULL,
+  `description` text DEFAULT NULL,
+  `number_of_questions` int(11) NOT NULL,
+  `start_time` time(6) NOT NULL,
+  `end_time` time(6) NOT NULL,
+  `total_marks` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quiz_details`
+--
+
+INSERT INTO `quiz_details` (`quizID`, `subjectCode`, `date`, `description`, `number_of_questions`, `start_time`, `end_time`, `total_marks`) VALUES
+(3, '2CP04', '2023-06-28', 'Unit: 1(Introduction To 8085)', 2, '09:10:00.000000', '14:22:00.000000', 2),
+(5, '2CP04', '2023-06-28', 'Unit :1', 2, '10:34:00.000000', '14:25:00.000000', 10),
+(6, '2CP04', '2023-06-29', 'My Third Quiz', 1, '10:03:00.000000', '10:05:00.000000', 10),
+(7, '2CP04', '2023-06-29', 'Unit :1', 2, '15:05:00.000000', '15:07:00.000000', 10),
+(12, '2CP04', '2023-06-29', 'Test', 2, '15:45:00.000000', '15:49:00.000000', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_questions`
+--
+
+CREATE TABLE `quiz_questions` (
+  `quizID` int(11) NOT NULL,
+  `sno` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `marks` int(11) NOT NULL,
+  `option1` text NOT NULL,
+  `option2` text NOT NULL,
+  `option3` text NOT NULL,
+  `option4` text NOT NULL,
+  `correct_answer` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quiz_questions`
+--
+
+INSERT INTO `quiz_questions` (`quizID`, `sno`, `question`, `marks`, `option1`, `option2`, `option3`, `option4`, `correct_answer`) VALUES
+(3, 1, 'What is the size of 8085 microprocessor?(in bits)', 1, '8', '16', '32', '64', 'Option 1'),
+(3, 2, 'How many addresses are available in 8085?', 1, '64 KB', '32 KB', '1 MB', '4 KB', 'Option 1'),
+(5, 0, 'Hello Bvm', 5, 'bvm', 'a', 'b', 'c', 'Option 1'),
+(5, 1, 'hello gcet', 5, 'a', 'b', 'c', 'gcet', 'Option 4'),
+(6, 0, 'Hello BVM! Find Name Of The Collage', 10, 'GCET', 'BVM', 'aa', 'bb', 'Option 2'),
+(7, 0, 'Demo Quiz', 5, 'a', 'bb', 'bvm', 'd', 'Option 3'),
+(7, 1, 'Hello Gcet', 5, 'GCET', 'b', 'DDIT', 'kush', 'Option 4'),
+(12, 1, 'Hello', 1, 'a', 'b', 'c', 'd', 'Option 1'),
+(12, 2, 'Friends', 1, 's', 'a', 'h', 'o', 'Option 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_result`
+--
+
+CREATE TABLE `quiz_result` (
+  `quizID` int(11) NOT NULL,
+  `studentID` varchar(20) NOT NULL,
+  `total_marks` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quiz_result`
+--
+
+INSERT INTO `quiz_result` (`quizID`, `studentID`, `total_marks`) VALUES
+(3, '22CP316', 2),
+(6, '22CP316', 0),
+(7, '22CP316', 5),
+(12, '22CP301', 1),
+(12, '22CP316', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_stud_answer`
+--
+
+CREATE TABLE `quiz_stud_answer` (
+  `quizID` int(11) NOT NULL,
+  `sno` int(11) NOT NULL,
+  `studentID` varchar(20) NOT NULL,
+  `attempted_answer` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quiz_stud_answer`
+--
+
+INSERT INTO `quiz_stud_answer` (`quizID`, `sno`, `studentID`, `attempted_answer`) VALUES
+(3, 1, '22CP316', 'Option 1'),
+(3, 2, '22CP316', 'Option 1'),
+(6, 0, '22CP316', 'Not Attempted'),
+(7, 0, '22CP316', 'Option 3'),
+(7, 1, '22CP316', 'Option 3'),
+(12, 1, '22CP301', 'Option 1'),
+(12, 1, '22CP316', 'Option 1'),
+(12, 2, '22CP301', 'Option 4'),
+(12, 2, '22CP316', 'Option 2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `stud`
 --
 
@@ -155,7 +268,8 @@ CREATE TABLE `stud` (
 --
 
 INSERT INTO `stud` (`studentID`, `userID`, `fatherName`, `motherName`, `semester`) VALUES
-('22CP316', 'kushtolia2003', 'Bhaveshbhai', 'Amitaben', 6);
+('22CP301', 'sahilpathan12', 'Ramesh Bhai', 'Nayana Ben', 4),
+('22CP316', 'kushtolia2003', 'Bhaveshbhai', 'Amitaben', 4);
 
 -- --------------------------------------------------------
 
@@ -178,7 +292,8 @@ CREATE TABLE `study_material` (
 --
 
 INSERT INTO `study_material` (`sno`, `subjectCode`, `userID`, `unitNo`, `unitName`, `author`, `path`) VALUES
-(4, '2CP01', 'mayurvegad12', 4, 'Permutation', 'Roason', 'PDF Placement_2022-23.pdf');
+(4, '2CP01', 'mayurvegad12', 4, 'Permutation', 'Roason', 'PDF Placement_2022-23.pdf'),
+(8, '2CP04', 'mayurvegad12', 10, 'Interrupts', 'NMP Sir', 'DOCX plan.docx');
 
 -- --------------------------------------------------------
 
@@ -197,7 +312,20 @@ CREATE TABLE `stud_attendance` (
 --
 
 INSERT INTO `stud_attendance` (`attendanceID`, `studentID`, `status`) VALUES
-(1, '22CP316', 'absent');
+(1, '22CP316', 'absent'),
+(2, '22CP316', 'present'),
+(3, '22CP316', 'present'),
+(6, '22CP316', 'present'),
+(7, '22CP316', 'present'),
+(8, '22CP316', 'absent'),
+(26, '22CP301', 'absent'),
+(26, '22CP316', 'present'),
+(30, '22CP301', 'present'),
+(30, '22CP316', 'present'),
+(31, '22CP301', 'absent'),
+(31, '22CP316', 'absent'),
+(33, '22CP301', 'present'),
+(33, '22CP316', 'absent');
 
 -- --------------------------------------------------------
 
@@ -216,7 +344,17 @@ CREATE TABLE `stud_attendance_detail` (
 --
 
 INSERT INTO `stud_attendance_detail` (`attendanceID`, `lectureID`, `date`) VALUES
-(1, 1, '2023-06-13');
+(1, 1, '2023-06-13'),
+(2, 1, '2023-06-16'),
+(3, 2, '2023-06-17'),
+(6, 2, '2023-06-18'),
+(7, 2, '2023-06-19'),
+(8, 4, '2023-06-19'),
+(26, 4, '2023-06-21'),
+(30, 4, '2023-06-22'),
+(31, 4, '2023-06-29'),
+(32, 1, '2023-06-29'),
+(33, 2, '2023-06-29');
 
 -- --------------------------------------------------------
 
@@ -291,7 +429,8 @@ INSERT INTO `users` (`userID`, `firstName`, `lastName`, `fullName`, `branch`, `e
 ('admin1', 'Gyandeep', 'Class', 'Gyandeep Class', '', 'kushtolia6767@gmail.com', '11', 'male', 'admin', '8758174630', '2003-10-18', 'Galaria Complex, Jamnagar', 361008, 'gc.jpg'),
 ('kushtolia2003', 'Kush', 'Tolia', 'Kush Tolia', 'Computer Engineering', 'kushtolia6767@gmail.com', '11', 'male', 'student', '8758174630', '1970-01-01', 'Patel Colony, Jamnagar', 361008, 'IMG-646f1ac3e4acf4.21973707.jpg'),
 ('mayurvegad12', 'Dr. Mayur', 'Vegad', 'Dr. Mayur Vegad', 'Computer Engineering', 'mayurvegad12@gmail.com', '12', 'male', 'faculty', '872359101', '1970-01-01', 'Moti Taki Chowk, Rajkot', 785002, 'IMG-64705af95c3ee0.70597164.jpg'),
-('narendrapatel12', 'Narendra', 'Patel', 'Narendra Patel', 'Computer Engineering', 'narendrapatterl12@gmail.com', '12', 'male', 'faculty', '9842145677', '1991-07-02', 'VVNagar', 361008, 'nmp_sir.jpg');
+('narendrapatel12', 'Narendra', 'Patel', 'Narendra Patel', 'Computer Engineering', 'narendrapatterl12@gmail.com', '12', 'male', 'faculty', '9842145677', '1991-07-02', 'VVNagar', 361008, 'nmp_sir.jpg'),
+('sahilpathan12', 'Sahil', 'Pathan', 'Sahil Pathan', 'Computer Engineering', 'sahilpathan12@gmail.com', 'qw', 'male', 'student', '9825217925', '1991-01-01', 'Iskon Mandir,Anand', 321558, 'IMG-649198577f42e6.06284068.png');
 
 --
 -- Indexes for dumped tables
@@ -335,6 +474,33 @@ ALTER TABLE `faculty_subject`
   ADD KEY `subjectCode` (`subjectCode`);
 
 --
+-- Indexes for table `quiz_details`
+--
+ALTER TABLE `quiz_details`
+  ADD PRIMARY KEY (`quizID`),
+  ADD KEY `subjectCode` (`subjectCode`);
+
+--
+-- Indexes for table `quiz_questions`
+--
+ALTER TABLE `quiz_questions`
+  ADD PRIMARY KEY (`quizID`,`sno`);
+
+--
+-- Indexes for table `quiz_result`
+--
+ALTER TABLE `quiz_result`
+  ADD PRIMARY KEY (`quizID`,`studentID`),
+  ADD KEY `studentID` (`studentID`);
+
+--
+-- Indexes for table `quiz_stud_answer`
+--
+ALTER TABLE `quiz_stud_answer`
+  ADD PRIMARY KEY (`quizID`,`sno`,`studentID`),
+  ADD KEY `studentID` (`studentID`);
+
+--
 -- Indexes for table `stud`
 --
 ALTER TABLE `stud`
@@ -353,8 +519,8 @@ ALTER TABLE `study_material`
 -- Indexes for table `stud_attendance`
 --
 ALTER TABLE `stud_attendance`
-  ADD KEY `studentID` (`studentID`),
-  ADD KEY `attendanceID` (`attendanceID`);
+  ADD PRIMARY KEY (`attendanceID`,`studentID`),
+  ADD KEY `studentID` (`studentID`);
 
 --
 -- Indexes for table `stud_attendance_detail`
@@ -390,19 +556,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `available_class`
 --
 ALTER TABLE `available_class`
-  MODIFY `lectureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `lectureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `quiz_details`
+--
+ALTER TABLE `quiz_details`
+  MODIFY `quizID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `study_material`
 --
 ALTER TABLE `study_material`
-  MODIFY `sno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `sno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `stud_attendance_detail`
 --
 ALTER TABLE `stud_attendance_detail`
-  MODIFY `attendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `attendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
@@ -430,6 +602,32 @@ ALTER TABLE `faculty`
 ALTER TABLE `faculty_subject`
   ADD CONSTRAINT `faculty_subject_ibfk_1` FOREIGN KEY (`facultyID`) REFERENCES `faculty` (`facultyID`),
   ADD CONSTRAINT `faculty_subject_ibfk_2` FOREIGN KEY (`subjectCode`) REFERENCES `subject_details` (`subjectCode`);
+
+--
+-- Constraints for table `quiz_details`
+--
+ALTER TABLE `quiz_details`
+  ADD CONSTRAINT `quiz_details_ibfk_1` FOREIGN KEY (`subjectCode`) REFERENCES `subject_details` (`subjectCode`);
+
+--
+-- Constraints for table `quiz_questions`
+--
+ALTER TABLE `quiz_questions`
+  ADD CONSTRAINT `quiz_questions_ibfk_1` FOREIGN KEY (`quizID`) REFERENCES `quiz_details` (`quizID`);
+
+--
+-- Constraints for table `quiz_result`
+--
+ALTER TABLE `quiz_result`
+  ADD CONSTRAINT `quiz_result_ibfk_1` FOREIGN KEY (`quizID`) REFERENCES `quiz_details` (`quizID`),
+  ADD CONSTRAINT `quiz_result_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `stud` (`studentID`);
+
+--
+-- Constraints for table `quiz_stud_answer`
+--
+ALTER TABLE `quiz_stud_answer`
+  ADD CONSTRAINT `quiz_stud_answer_ibfk_1` FOREIGN KEY (`quizID`,`sno`) REFERENCES `quiz_questions` (`quizID`, `sno`),
+  ADD CONSTRAINT `quiz_stud_answer_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `stud` (`studentID`);
 
 --
 -- Constraints for table `stud`

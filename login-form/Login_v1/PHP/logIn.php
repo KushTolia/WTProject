@@ -73,8 +73,13 @@
                 }
             }
             else
-            {
-                echo "Login Denied";
+            {?>
+                <script>
+                    alert("Sorry User ID OR Password Incorrect Please Try Again");
+                    window.location.href='../index.html';
+                </script>
+                <?php    
+                // header("Location:../index.html");
             }
         }
         else

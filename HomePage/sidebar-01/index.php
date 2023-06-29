@@ -62,17 +62,13 @@
 	            </ul> -->
 	          </li>
 	          <li>
-	              <!-- <a href="#">About</a> -->
-	              <a href="../../ViewStudyMaterial/index.php" target="_blank">View Study Material</a>
-	          </li>
-	          <li>
               <!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a> -->
               <!-- <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="#">Page 1</a>
+                  <a href="#">Page 1</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
+                  <a href="#">Page 2</a>
                 </li>
                 <li>
                     <a href="#">Page 3</a>
@@ -82,8 +78,15 @@
 	          <li>
               <a href="../../Timetable/index.php" target="_blank">View Time Table</a>
 	          </li>
+            <li>
+              <!-- <a href="#">About</a> -->
+              <a href="../../ViewStudyMaterial/index.php" target="_blank">View Study Material</a>
+            </li>
+            <li>
+              <a href="../../ViewStudentAttendance/colorlib-regform-5/index.php">View Attendance</a>
+            </li>
 	          <li>
-              <a href="#" target="_blank">Results</a>
+              <a href="../../QuizResult/index.php" target="_blank">Quiz Results</a>
 	          </li>
 	          <li>
               <a href="../../Contact Us/contact/index.html" target="_blank">Contact</a>
@@ -132,29 +135,27 @@
 	              <!-- <a href="#">About</a> -->
 	              <a href="../../Class Management/index.php" target="_blank">Class Management</a>
 	          </li>
-	          <li>
-              <!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a> -->
-              <!-- <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
-              </ul> -->
-	          </li>
-	          <li>
-              <a href="../../Attendace Of Student/Timetable/index.html" target="_blank">Attendence Of Students</a>
-	          </li>
-	          <li>
+            <li>
               <a href="../../StudyMaterial/index.php" target="_blank">Add Study Material</a>
 	          </li>
 	          <li>
               <a href="../../ViewStudyMaterial/index.php" target="_blank">View Study Material</a>
 	          </li>
+            
+	          <li>
+              <a href="../../StudentAttendance/colorlib-regform-5/index.php" target="_blank">Take Attendance Of Students</a>
+	          </li>
+            <li>
+              <a href="../../ViewStudentAttendance/colorlib-regform-5/index.php" target="_blank">View Attendance Of Students</a>
+            </li>
+            <li>
+              <a href="../../Quiz/colorlib-regform-5/index.php" target="_blank">Create Quiz</a>
+            </li>
+            <li>
+              <a href="../../QuizResult/index.php" target="_blank">Quiz Results</a>
+            </li>
+            
+	          
 	          <li>
               <a href="../../Contact Us/contact/index.html" target="_blank">Contact</a>
 	          </li>
@@ -205,35 +206,32 @@
             <li>
               <a href="../../RegistrationForm/kush/index.php" target="_blank">Add New Faculty/Student</a>
             </li>
-            <li>
-              <a href="../../Subjects/details/index.php" target="_blank">Add New Subject</a>
-            </li>
           </li>
           <li>
             <a href="../../ViewFacultySubject/index.php" target="_blank">View Faculty Subject</a>
+          </li>
+          <li>
+            <a href="../../Subjects/details/index.php" target="_blank">Add New Subject</a>
           </li>
             <li>
               <a href="../../StudyMaterial/index.php" target="_blank">Add Study Material</a>
             </li>
 	          <li>
-              <!-- <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a> -->
-              <!-- <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
-              </ul> -->
+              <a href="../../ViewStudyMaterial/index.php" target="_blank">View Study Material</a>
+            </li>
+	          <li>
+              <a href="../../StudentAttendance/colorlib-regform-5/index.php" target="_blank">Take Attendance Of Students</a>
 	          </li>
             <li>
-              <a href="../../ViewStudyMaterial/index.php" target="_blank">View Study Material</a>
-	          <li>
-              <a href="../../Attendace Of Student/Timetable/index.html" target="_blank">Attendence Of Students</a>
+              <a href="../../ViewStudentAttendance/colorlib-regform-5/index.php" target="_blank">View Attendance Of Students</a>
+            </li>
+            <li>
+              <a href="../../Quiz/colorlib-regform-5/index.php" target="_blank">Create Quiz</a>
 	          </li>
+	          <li>
+              <a href="../../QuizResult/index.php" target="_blank">Quiz Results</a>
+	          </li>
+
 	          <li>
               <a href="../../Contact Us/contact/index.html" target="_blank">Contact</a>
 	          </li>
